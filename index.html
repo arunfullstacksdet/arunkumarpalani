@@ -1,103 +1,1108 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Arun Kumar Palani | QA Automation Engineer</title>
-  <link rel="stylesheet" href="style.css">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet"/>
+  <style>
+    :root {
+      --bg: #0a0e17;
+      --surface: #111827;
+      --card: #141c2e;
+      --border: #1e2d45;
+      --accent: #00e5ff;
+      --accent2: #7c3aed;
+      --accent3: #10b981;
+      --text: #e2e8f0;
+      --muted: #64748b;
+      --green: #10b981;
+      --yellow: #f59e0b;
+      --red: #ef4444;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'DM Mono', monospace;
+      font-size: 0.9rem;
+      overflow-x: hidden;
+    }
+
+    /* ── NOISE TEXTURE ── */
+    body::before {
+      content: '';
+      position: fixed; inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+      pointer-events: none; z-index: 0; opacity: 0.4;
+    }
+
+    h1,h2,h3,h4,h5 { font-family: 'Syne', sans-serif; }
+
+    /* ── NAVBAR ── */
+    #navbar {
+      position: fixed; top: 0; width: 100%; z-index: 1000;
+      background: rgba(10,14,23,0.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      padding: 0.8rem 0;
+      transition: all 0.3s;
+    }
+    .nav-brand {
+      font-family: 'Syne', sans-serif;
+      font-weight: 800; font-size: 1.1rem;
+      color: var(--accent) !important;
+      letter-spacing: 0.05em;
+      text-decoration: none;
+    }
+    .nav-brand span { color: var(--text); }
+    .navbar-nav .nav-link {
+      color: var(--muted) !important;
+      font-size: 0.78rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 0.4rem 0.9rem !important;
+      transition: color 0.2s;
+      position: relative;
+    }
+    .navbar-nav .nav-link::after {
+      content: '';
+      position: absolute; bottom: 0; left: 50%; right: 50%;
+      height: 1px; background: var(--accent);
+      transition: left 0.2s, right 0.2s;
+    }
+    .navbar-nav .nav-link:hover { color: var(--accent) !important; }
+    .navbar-nav .nav-link:hover::after { left: 0.9rem; right: 0.9rem; }
+    .navbar-toggler { border-color: var(--border); }
+    .navbar-toggler-icon { filter: invert(0.8); }
+
+    /* ── HERO ── */
+    #hero {
+      min-height: 100vh;
+      display: flex; align-items: center;
+      padding: 7rem 0 4rem;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero-grid-bg {
+      position: absolute; inset: 0;
+      background-image:
+        linear-gradient(var(--border) 1px, transparent 1px),
+        linear-gradient(90deg, var(--border) 1px, transparent 1px);
+      background-size: 60px 60px;
+      opacity: 0.3;
+      mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 30%, transparent 100%);
+    }
+    .hero-glow {
+      position: absolute;
+      width: 600px; height: 600px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(0,229,255,0.07) 0%, transparent 70%);
+      top: 50%; left: 50%; transform: translate(-50%,-50%);
+      pointer-events: none;
+    }
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      background: rgba(0,229,255,0.08);
+      border: 1px solid rgba(0,229,255,0.25);
+      color: var(--accent);
+      padding: 0.35rem 0.9rem;
+      border-radius: 999px;
+      font-size: 0.72rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      margin-bottom: 1.5rem;
+      animation: fadeUp 0.6s ease both;
+    }
+    .hero-badge::before {
+      content: ''; display: block;
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: var(--accent);
+      animation: pulse 1.5s infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.4; transform: scale(1.3); }
+    }
+    .hero-title {
+      font-size: clamp(2.8rem, 7vw, 5.5rem);
+      font-weight: 800;
+      line-height: 1.05;
+      letter-spacing: -0.03em;
+      animation: fadeUp 0.6s 0.1s ease both;
+    }
+    .hero-title .line2 {
+      background: linear-gradient(90deg, var(--accent), var(--accent2));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .hero-sub {
+      color: var(--muted);
+      max-width: 500px;
+      line-height: 1.8;
+      margin: 1.2rem 0 2rem;
+      animation: fadeUp 0.6s 0.2s ease both;
+    }
+    .hero-cta {
+      display: flex; flex-wrap: wrap; gap: 0.8rem;
+      animation: fadeUp 0.6s 0.3s ease both;
+    }
+    .btn-primary-custom {
+      background: var(--accent);
+      color: #000;
+      border: none;
+      padding: 0.7rem 1.8rem;
+      font-family: 'Syne', sans-serif;
+      font-weight: 700;
+      font-size: 0.85rem;
+      letter-spacing: 0.06em;
+      border-radius: 4px;
+      transition: all 0.2s;
+      text-decoration: none;
+      display: inline-flex; align-items: center; gap: 0.5rem;
+    }
+    .btn-primary-custom:hover {
+      background: #fff;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 30px rgba(0,229,255,0.3);
+    }
+    .btn-ghost {
+      background: transparent;
+      color: var(--text);
+      border: 1px solid var(--border);
+      padding: 0.7rem 1.8rem;
+      font-family: 'Syne', sans-serif;
+      font-weight: 600;
+      font-size: 0.85rem;
+      letter-spacing: 0.06em;
+      border-radius: 4px;
+      transition: all 0.2s;
+      text-decoration: none;
+      display: inline-flex; align-items: center; gap: 0.5rem;
+    }
+    .btn-ghost:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-2px); }
+
+    .hero-stats {
+      display: flex; gap: 2.5rem; margin-top: 3rem;
+      animation: fadeUp 0.6s 0.4s ease both;
+    }
+    .stat-item { text-align: center; }
+    .stat-num {
+      font-family: 'Syne', sans-serif;
+      font-size: 2rem; font-weight: 800;
+      color: var(--accent);
+      line-height: 1;
+    }
+    .stat-label { color: var(--muted); font-size: 0.72rem; margin-top: 0.2rem; text-transform: uppercase; letter-spacing: 0.08em; }
+
+    /* Terminal card */
+    .terminal-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      overflow: hidden;
+      animation: fadeUp 0.6s 0.2s ease both;
+      box-shadow: 0 40px 80px rgba(0,0,0,0.5);
+    }
+    .terminal-bar {
+      background: var(--surface);
+      padding: 0.7rem 1rem;
+      display: flex; align-items: center; gap: 0.5rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .dot { width: 12px; height: 12px; border-radius: 50%; }
+    .dot-red { background: #ef4444; }
+    .dot-yellow { background: #f59e0b; }
+    .dot-green { background: #10b981; }
+    .terminal-title { color: var(--muted); font-size: 0.72rem; margin-left: auto; margin-right: auto; letter-spacing: 0.06em; }
+    .terminal-body { padding: 1.5rem; font-size: 0.8rem; line-height: 1.9; }
+    .t-comment { color: #4b5563; }
+    .t-key { color: #7c3aed; }
+    .t-str { color: var(--accent); }
+    .t-num { color: #f59e0b; }
+    .t-bool { color: #10b981; }
+    .t-bracket { color: var(--muted); }
+    .cursor {
+      display: inline-block;
+      width: 9px; height: 1rem;
+      background: var(--accent);
+      animation: blink 1s infinite;
+      vertical-align: text-bottom;
+      margin-left: 2px;
+    }
+    @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0} }
+
+    /* ── SECTIONS ── */
+    section { padding: 5rem 0; position: relative; }
+    .section-label {
+      font-size: 0.7rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 0.5rem;
+    }
+    .section-title {
+      font-size: clamp(1.8rem, 4vw, 2.8rem);
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      margin-bottom: 0.5rem;
+    }
+    .section-sub { color: var(--muted); max-width: 500px; line-height: 1.7; margin-bottom: 3rem; }
+    .divider { width: 40px; height: 2px; background: var(--accent); margin: 1rem 0 2.5rem; }
+
+    /* ── SKILLS ── */
+    #skills { background: var(--surface); }
+    .skill-category {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 1.5rem;
+      height: 100%;
+      transition: border-color 0.3s, transform 0.3s;
+    }
+    .skill-category:hover { border-color: var(--accent); transform: translateY(-4px); }
+    .skill-cat-title {
+      font-family: 'Syne', sans-serif;
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 1rem;
+      display: flex; align-items: center; gap: 0.5rem;
+    }
+    .skill-tag {
+      display: inline-block;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid var(--border);
+      color: var(--text);
+      padding: 0.25rem 0.65rem;
+      border-radius: 4px;
+      font-size: 0.72rem;
+      margin: 0.2rem;
+      transition: all 0.2s;
+    }
+    .skill-tag:hover { background: rgba(0,229,255,0.1); border-color: var(--accent); color: var(--accent); }
+
+    /* ── EXPERIENCE ── */
+    .timeline { position: relative; padding-left: 2rem; }
+    .timeline::before {
+      content: '';
+      position: absolute; left: 0; top: 0; bottom: 0;
+      width: 1px; background: var(--border);
+    }
+    .tl-item {
+      position: relative;
+      margin-bottom: 3rem;
+      animation: fadeUp 0.5s ease both;
+    }
+    .tl-dot {
+      position: absolute; left: -2.45rem; top: 0.3rem;
+      width: 14px; height: 14px;
+      border-radius: 50%;
+      background: var(--accent);
+      border: 3px solid var(--bg);
+      box-shadow: 0 0 12px rgba(0,229,255,0.5);
+    }
+    .tl-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 1.5rem;
+      transition: border-color 0.3s;
+    }
+    .tl-card:hover { border-color: rgba(0,229,255,0.4); }
+    .tl-company {
+      font-family: 'Syne', sans-serif;
+      font-weight: 800; font-size: 1.15rem;
+      color: var(--text);
+    }
+    .tl-role {
+      color: var(--accent);
+      font-size: 0.8rem;
+      font-weight: 500;
+      letter-spacing: 0.06em;
+    }
+    .tl-period {
+      color: var(--muted);
+      font-size: 0.72rem;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      padding: 0.2rem 0.7rem;
+      border-radius: 999px;
+      display: inline-block;
+      margin-bottom: 1rem;
+    }
+    .tl-bullets { list-style: none; }
+    .tl-bullets li {
+      padding: 0.3rem 0 0.3rem 1.2rem;
+      position: relative;
+      color: var(--muted);
+      font-size: 0.82rem;
+      line-height: 1.6;
+    }
+    .tl-bullets li::before {
+      content: '▸';
+      position: absolute; left: 0;
+      color: var(--accent);
+    }
+    .project-chip {
+      display: inline-flex; align-items: center; gap: 0.4rem;
+      background: rgba(124,58,237,0.1);
+      border: 1px solid rgba(124,58,237,0.3);
+      color: #a78bfa;
+      padding: 0.2rem 0.7rem;
+      border-radius: 4px;
+      font-size: 0.7rem;
+      margin: 0.2rem;
+      letter-spacing: 0.04em;
+    }
+
+    /* ── PROJECTS ── */
+    #projects { background: var(--surface); }
+    .project-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 1.5rem;
+      height: 100%;
+      transition: all 0.3s;
+      position: relative;
+      overflow: hidden;
+    }
+    .project-card::before {
+      content: '';
+      position: absolute; top: 0; left: 0; right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, var(--accent), var(--accent2));
+      transform: scaleX(0);
+      transition: transform 0.3s;
+    }
+    .project-card:hover { border-color: rgba(0,229,255,0.3); transform: translateY(-6px); box-shadow: 0 20px 50px rgba(0,0,0,0.4); }
+    .project-card:hover::before { transform: scaleX(1); }
+    .project-icon {
+      width: 44px; height: 44px;
+      background: rgba(0,229,255,0.08);
+      border: 1px solid rgba(0,229,255,0.2);
+      border-radius: 8px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.2rem;
+      margin-bottom: 1rem;
+    }
+    .project-title {
+      font-family: 'Syne', sans-serif;
+      font-weight: 700; font-size: 1rem;
+      margin-bottom: 0.5rem;
+    }
+    .project-desc { color: var(--muted); font-size: 0.8rem; line-height: 1.7; margin-bottom: 1rem; }
+    .tech-stack { display: flex; flex-wrap: wrap; gap: 0.3rem; }
+    .tech-badge {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid var(--border);
+      color: var(--muted);
+      padding: 0.15rem 0.55rem;
+      border-radius: 3px;
+      font-size: 0.68rem;
+    }
+    .project-links { margin-top: 1.2rem; display: flex; gap: 0.8rem; }
+    .project-link {
+      color: var(--accent);
+      font-size: 0.75rem;
+      text-decoration: none;
+      display: flex; align-items: center; gap: 0.3rem;
+      transition: opacity 0.2s;
+    }
+    .project-link:hover { opacity: 0.7; color: var(--accent); }
+
+    /* ── CONTACT ── */
+    #contact {
+      background: var(--bg);
+    }
+    .contact-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 3rem;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .contact-card::before {
+      content: '';
+      position: absolute; top: -100px; left: 50%;
+      transform: translateX(-50%);
+      width: 400px; height: 400px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(0,229,255,0.05) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .contact-item {
+      display: flex; align-items: center; gap: 1rem;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1rem 1.2rem;
+      margin-bottom: 0.8rem;
+      transition: border-color 0.2s;
+      text-decoration: none;
+    }
+    .contact-item:hover { border-color: var(--accent); }
+    .contact-item i { color: var(--accent); font-size: 1.1rem; width: 20px; }
+    .contact-item span { color: var(--text); font-size: 0.82rem; }
+
+    /* ── AWARDS ── */
+    .award-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 1.5rem;
+      display: flex; align-items: flex-start; gap: 1rem;
+      transition: border-color 0.3s;
+    }
+    .award-card:hover { border-color: var(--yellow); }
+    .award-icon { font-size: 1.8rem; line-height: 1; }
+    .award-title {
+      font-family: 'Syne', sans-serif;
+      font-weight: 700; font-size: 0.95rem;
+      color: var(--yellow);
+    }
+    .award-desc { color: var(--muted); font-size: 0.78rem; margin-top: 0.3rem; line-height: 1.5; }
+
+    /* ── FOOTER ── */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 2rem 0;
+      text-align: center;
+      color: var(--muted);
+      font-size: 0.75rem;
+    }
+    footer a { color: var(--accent); text-decoration: none; }
+
+    /* ── ANIMATIONS ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .fade-up {
+      opacity: 0;
+      animation: fadeUp 0.6s ease both;
+    }
+
+    /* ── SCROLL TO TOP ── */
+    #scrollTop {
+      position: fixed; bottom: 2rem; right: 2rem;
+      width: 42px; height: 42px;
+      background: var(--accent);
+      color: #000;
+      border: none; border-radius: 8px;
+      cursor: pointer;
+      display: none;
+      align-items: center; justify-content: center;
+      font-size: 1rem;
+      z-index: 999;
+      transition: all 0.2s;
+      box-shadow: 0 4px 20px rgba(0,229,255,0.4);
+    }
+    #scrollTop:hover { background: #fff; transform: translateY(-2px); }
+    #scrollTop.visible { display: flex; }
+
+    /* ── MOBILE ── */
+    @media (max-width: 768px) {
+      .hero-stats { gap: 1.5rem; }
+      .contact-card { padding: 2rem 1.2rem; }
+    }
+
+    /* ── ACTIVE NAV ── */
+    .nav-link.active-nav { color: var(--accent) !important; }
+  </style>
 </head>
 <body>
 
-<header>
-  <h1>Arun Kumar Palani</h1>
-  <p>Lead QA Automation Engineer | SDET | 7+ Years Experience</p>
-</header>
-
-<nav>
-  <a href="#about">About</a>
-  <a href="#skills">Skills</a>
-  <a href="#experience">Experience</a>
-  <a href="#projects">Projects</a>
-  <a href="#contact">Contact</a>
+<!-- NAVBAR -->
+<nav class="navbar navbar-expand-lg" id="navbar">
+  <div class="container">
+    <a class="nav-brand" href="#hero">ARUN<span>.QA</span></a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse justify-content-end" id="navMenu">
+      <ul class="navbar-nav gap-1">
+        <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
+        <li class="nav-item"><a class="nav-link" href="#skills">Skills</a></li>
+        <li class="nav-item"><a class="nav-link" href="#experience">Experience</a></li>
+        <li class="nav-item"><a class="nav-link" href="#projects">Projects</a></li>
+        <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+      </ul>
+    </div>
+  </div>
 </nav>
 
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-grid-bg"></div>
+  <div class="hero-glow"></div>
+  <div class="container position-relative">
+    <div class="row align-items-center gy-5">
+      <div class="col-lg-6">
+        <div class="hero-badge"><i class="bi bi-patch-check-fill"></i>Available for Opportunities</div>
+        <h1 class="hero-title">
+          Arun Kumar<br>
+          <span class="line2">Palani</span>
+        </h1>
+        <p class="hero-sub">Lead QA Automation Engineer · SDET · 7+ years crafting bulletproof test frameworks across aerospace, fintech & enterprise domains.</p>
+        <div class="hero-cta">
+          <a href="#contact" class="btn-primary-custom"><i class="bi bi-send-fill"></i>Get in Touch</a>
+          <a href="#experience" class="btn-ghost"><i class="bi bi-briefcase"></i>View Experience</a>
+          <a href="https://linkedin.com/in/arunkumarpalani" target="_blank" class="btn-ghost"><i class="bi bi-linkedin"></i>LinkedIn</a>
+        </div>
+        <div class="hero-stats">
+          <div class="stat-item">
+            <div class="stat-num">7+</div>
+            <div class="stat-label">Years Exp</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-num">500+</div>
+            <div class="stat-label">Tests Automated</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-num">4+</div>
+            <div class="stat-label">Engineers Led</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-num">3</div>
+            <div class="stat-label">Domains</div>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-6">
+        <div class="terminal-card">
+          <div class="terminal-bar">
+            <span class="dot dot-red"></span>
+            <span class="dot dot-yellow"></span>
+            <span class="dot dot-green"></span>
+            <span class="terminal-title">arun.config.json</span>
+          </div>
+          <div class="terminal-body">
+            <span class="t-bracket">{</span><br>
+            &nbsp;&nbsp;<span class="t-key">"name"</span><span class="t-bracket">:</span> <span class="t-str">"Arun Kumar Palani"</span><span class="t-bracket">,</span><br>
+            &nbsp;&nbsp;<span class="t-key">"role"</span><span class="t-bracket">:</span> <span class="t-str">"Lead QA Automation Engineer"</span><span class="t-bracket">,</span><br>
+            &nbsp;&nbsp;<span class="t-key">"location"</span><span class="t-bracket">:</span> <span class="t-str">"Bengaluru, India"</span><span class="t-bracket">,</span><br>
+            &nbsp;&nbsp;<span class="t-key">"experience"</span><span class="t-bracket">:</span> <span class="t-num">7</span><span class="t-bracket">,</span><br>
+            &nbsp;&nbsp;<span class="t-key">"primaryStack"</span><span class="t-bracket">:</span> <span class="t-bracket">[</span><span class="t-str">"C#"</span><span class="t-bracket">,</span> <span class="t-str">"Selenium"</span><span class="t-bracket">,</span> <span class="t-str">"Playwright"</span><span class="t-bracket">]</span><span class="t-bracket">,</span><br>
+            &nbsp;&nbsp;<span class="t-key">"cicd"</span><span class="t-bracket">:</span> <span class="t-bracket">[</span><span class="t-str">"Azure Pipelines"</span><span class="t-bracket">,</span> <span class="t-str">"GitLab CI"</span><span class="t-bracket">]</span><span class="t-bracket">,</span><br>
+            &nbsp;&nbsp;<span class="t-key">"teamLead"</span><span class="t-bracket">:</span> <span class="t-bool">true</span><span class="t-bracket">,</span><br>
+            &nbsp;&nbsp;<span class="t-key">"testcasesAutomated"</span><span class="t-bracket">:</span> <span class="t-num">500</span><span class="t-bracket">,</span><br>
+            &nbsp;&nbsp;<span class="t-key">"awards"</span><span class="t-bracket">:</span> <span class="t-bracket">[</span><span class="t-str">"R-Star Award"</span><span class="t-bracket">,</span> <span class="t-str">"Spot Award"</span><span class="t-bracket">]</span><span class="t-bracket">,</span><br>
+            &nbsp;&nbsp;<span class="t-key">"openToWork"</span><span class="t-bracket">:</span> <span class="t-bool">true</span><br>
+            <span class="t-bracket">}</span><span class="cursor"></span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
 <section id="about">
-  <h2>About Me</h2>
-  <p>
-    Results-driven Lead QA Automation Engineer with 7+ years of experience in automation,
-    CI/CD, and quality engineering across aerospace and fintech domains.
-  </p>
+  <div class="container">
+    <div class="row gy-4 align-items-center">
+      <div class="col-lg-5">
+        <div class="section-label">// ABOUT ME</div>
+        <h2 class="section-title">Passionate About<br><span style="color:var(--accent)">Quality Engineering</span></h2>
+        <div class="divider"></div>
+        <p style="color:var(--muted);line-height:1.9;font-size:0.88rem;">
+          Results-driven Lead QA Automation Engineer with a deep focus on building scalable, maintainable test frameworks that actually move the needle. I've spent 7+ years helping teams ship software with confidence — from aerospace navigation portals to fintech mortgage platforms.
+        </p>
+        <p style="color:var(--muted);line-height:1.9;font-size:0.88rem;margin-top:1rem;">
+          I don't just write tests — I architect quality systems. CI/CD pipelines, rich reporting, mentoring junior engineers, and bridging the gap between Dev and QA are my second nature.
+        </p>
+        <div class="mt-3">
+          <a href="mailto:arun.qa961@gmail.com" class="btn-primary-custom" style="font-size:0.8rem;">
+            <i class="bi bi-envelope-fill"></i>arun.qa961@gmail.com
+          </a>
+        </div>
+      </div>
+      <div class="col-lg-7">
+        <div class="row g-3">
+          <div class="col-6">
+            <div class="tl-card" style="text-align:center;padding:2rem 1rem;">
+              <div style="font-size:2rem;margin-bottom:0.5rem;">🚀</div>
+              <div style="font-family:'Syne',sans-serif;font-weight:700;font-size:0.9rem;">Framework Architect</div>
+              <div style="color:var(--muted);font-size:0.75rem;margin-top:0.3rem;">Built Selenium-C# POM frameworks from scratch</div>
+            </div>
+          </div>
+          <div class="col-6">
+            <div class="tl-card" style="text-align:center;padding:2rem 1rem;">
+              <div style="font-size:2rem;margin-bottom:0.5rem;">⚙️</div>
+              <div style="font-family:'Syne',sans-serif;font-weight:700;font-size:0.9rem;">CI/CD Engineer</div>
+              <div style="color:var(--muted);font-size:0.75rem;margin-top:0.3rem;">End-to-end pipelines on Azure & GitLab</div>
+            </div>
+          </div>
+          <div class="col-6">
+            <div class="tl-card" style="text-align:center;padding:2rem 1rem;">
+              <div style="font-size:2rem;margin-bottom:0.5rem;">👥</div>
+              <div style="font-family:'Syne',sans-serif;font-weight:700;font-size:0.9rem;">Team Leader</div>
+              <div style="color:var(--muted);font-size:0.75rem;margin-top:0.3rem;">Mentored 4+ QA engineers in Agile teams</div>
+            </div>
+          </div>
+          <div class="col-6">
+            <div class="tl-card" style="text-align:center;padding:2rem 1rem;">
+              <div style="font-size:2rem;margin-bottom:0.5rem;">🎯</div>
+              <div style="font-family:'Syne',sans-serif;font-weight:700;font-size:0.9rem;">Full-Stack QA</div>
+              <div style="color:var(--muted);font-size:0.75rem;margin-top:0.3rem;">UI · API · DB · Performance Testing</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </section>
 
+<!-- SKILLS -->
 <section id="skills">
-  <h2>Skills</h2>
-  <ul>
-    <li>Selenium, Playwright, Cypress</li>
-    <li>C#, NUnit, SQL</li>
-    <li>API Testing (Postman)</li>
-    <li>CI/CD (Azure, GitLab)</li>
-    <li>Automation Framework Design (POM)</li>
-    <li>Agile Scrum, Jira, Azure DevOps</li>
-  </ul>
+  <div class="container">
+    <div class="section-label">// CORE SKILLS</div>
+    <h2 class="section-title">Technical Arsenal</h2>
+    <div class="divider"></div>
+    <div class="row g-3">
+
+      <div class="col-md-6 col-lg-4">
+        <div class="skill-category">
+          <div class="skill-cat-title"><i class="bi bi-robot"></i>Automation & Testing</div>
+          <div>
+            <span class="skill-tag">Selenium WebDriver</span>
+            <span class="skill-tag">Playwright</span>
+            <span class="skill-tag">Cypress</span>
+            <span class="skill-tag">NUnit</span>
+            <span class="skill-tag">AG Grid Automation</span>
+            <span class="skill-tag">Regression Testing</span>
+            <span class="skill-tag">Smoke Testing</span>
+            <span class="skill-tag">Cross-Browser Testing</span>
+            <span class="skill-tag">Black Box Testing</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-6 col-lg-4">
+        <div class="skill-category">
+          <div class="skill-cat-title"><i class="bi bi-code-slash"></i>Programming Languages</div>
+          <div>
+            <span class="skill-tag">C# (Primary)</span>
+            <span class="skill-tag">SQL</span>
+            <span class="skill-tag">JavaScript (Basic)</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-6 col-lg-4">
+        <div class="skill-category">
+          <div class="skill-cat-title"><i class="bi bi-cloud-arrow-up"></i>CI/CD & DevOps</div>
+          <div>
+            <span class="skill-tag">Azure Pipelines</span>
+            <span class="skill-tag">Azure DevOps (TFS)</span>
+            <span class="skill-tag">GitLab CI/CD</span>
+            <span class="skill-tag">Git</span>
+            <span class="skill-tag">Bitbucket</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-6 col-lg-4">
+        <div class="skill-category">
+          <div class="skill-cat-title"><i class="bi bi-diagram-3"></i>Framework Design</div>
+          <div>
+            <span class="skill-tag">Page Object Model</span>
+            <span class="skill-tag">Data-Driven Testing</span>
+            <span class="skill-tag">Reusable Utilities</span>
+            <span class="skill-tag">SeleniumHelper Wrapper</span>
+            <span class="skill-tag">ExcelReader</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-6 col-lg-4">
+        <div class="skill-category">
+          <div class="skill-cat-title"><i class="bi bi-server"></i>API & Backend</div>
+          <div>
+            <span class="skill-tag">Postman</span>
+            <span class="skill-tag">REST API Testing</span>
+            <span class="skill-tag">Database Validation</span>
+            <span class="skill-tag">MS SQL Server</span>
+            <span class="skill-tag">SSMS</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-6 col-lg-4">
+        <div class="skill-category">
+          <div class="skill-cat-title"><i class="bi bi-bar-chart-line"></i>Reporting & Tools</div>
+          <div>
+            <span class="skill-tag">ExtentReports</span>
+            <span class="skill-tag">Allure Reports</span>
+            <span class="skill-tag">Jira</span>
+            <span class="skill-tag">TestRail</span>
+            <span class="skill-tag">Defect Lifecycle</span>
+            <span class="skill-tag">RCA</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
 </section>
 
+<!-- EXPERIENCE -->
 <section id="experience">
-  <h2>Experience</h2>
+  <div class="container">
+    <div class="section-label">// WORK HISTORY</div>
+    <h2 class="section-title">Experience</h2>
+    <div class="divider"></div>
+    <div class="row">
+      <div class="col-lg-10 offset-lg-1">
+        <div class="timeline">
 
-  <div class="card">
-    <h3>Collins Aerospace</h3>
-    <p>Lead QA Automation Engineer (2022–Present)</p>
-    <p>Led automation strategy, built frameworks, and managed QA team.</p>
+          <!-- Collins -->
+          <div class="tl-item">
+            <div class="tl-dot"></div>
+            <div class="tl-card">
+              <div class="d-flex flex-wrap align-items-start justify-content-between gap-2 mb-2">
+                <div>
+                  <div class="tl-company">Collins Aerospace</div>
+                  <div class="tl-role">Lead QA Automation Engineer</div>
+                </div>
+                <span class="tl-period"><i class="bi bi-calendar3"></i>&nbsp;Oct 2022 – Present</span>
+              </div>
+              <ul class="tl-bullets">
+                <li>Designed and built a scalable Selenium-C# automation framework from scratch using NUnit and Page Object Model with a custom SeleniumHelper wrapper.</li>
+                <li>Automated 500+ test cases covering regression, smoke, and critical business flows — significantly reducing manual regression effort.</li>
+                <li>Owned end-to-end CI/CD pipeline via GitLab CI/CD and Azure Pipelines: framework setup, test execution, reporting, and deployment.</li>
+                <li>Led and mentored a team of 4 QA engineers on automation framework standards, CI/CD pipeline usage, and Agile best practices.</li>
+                <li>Integrated ExtentReports and Allure Reporting for rich HTML reports with step-level logging and screenshots on failure.</li>
+                <li>Performed API testing (Postman) and database validation (MS SQL Server) to verify backend reliability and data integrity.</li>
+              </ul>
+              <div class="mt-3">
+                <span class="project-chip"><i class="bi bi-folder2"></i>ESIOP Web Automation — OneCollins RAM (Jan 2025–Present)</span>
+                <span class="project-chip"><i class="bi bi-folder2"></i>DMSMS Access Control Portal (Sep 2024–Jan 2025)</span>
+                <span class="project-chip"><i class="bi bi-folder2"></i>NRE Forecast Tool (Oct 2022–Aug 2024)</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Intimetec -->
+          <div class="tl-item">
+            <div class="tl-dot" style="background:var(--accent2);box-shadow:0 0 12px rgba(124,58,237,0.5);"></div>
+            <div class="tl-card">
+              <div class="d-flex flex-wrap align-items-start justify-content-between gap-2 mb-2">
+                <div>
+                  <div class="tl-company">Intimetec</div>
+                  <div class="tl-role" style="color:var(--accent2)">Software Engineer – QA</div>
+                </div>
+                <span class="tl-period"><i class="bi bi-calendar3"></i>&nbsp;Mar 2021 – Sep 2022</span>
+              </div>
+              <ul class="tl-bullets">
+                <li>Designed and executed functional, integration, and regression test cases for loan processing and credit/employment/SSN verification modules.</li>
+                <li>Performed API testing using Postman for REST endpoints; tracked defects in Jira with structured severity and priority.</li>
+                <li>Collaborated on root cause analysis and supported stable production releases through structured QA cycles.</li>
+              </ul>
+              <div class="mt-2">
+                <span class="skill-tag" style="font-size:0.7rem;">Fintech</span>
+                <span class="skill-tag" style="font-size:0.7rem;">Mortgage Processing</span>
+                <span class="skill-tag" style="font-size:0.7rem;">Background Verification</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Infanion -->
+          <div class="tl-item">
+            <div class="tl-dot" style="background:var(--green);box-shadow:0 0 12px rgba(16,185,129,0.5);"></div>
+            <div class="tl-card">
+              <div class="d-flex flex-wrap align-items-start justify-content-between gap-2 mb-2">
+                <div>
+                  <div class="tl-company">Infanion</div>
+                  <div class="tl-role" style="color:var(--green)">Associate Test Engineer</div>
+                </div>
+                <span class="tl-period"><i class="bi bi-calendar3"></i>&nbsp;Jan 2019 – Mar 2021</span>
+              </div>
+              <ul class="tl-bullets">
+                <li>Executed functional, regression, and sanity testing across multiple product modules; built early Selenium automation scripts.</li>
+                <li>Prepared test plans, test cases, and defect reports using Azure DevOps and Jira; gained strong foundational Agile QA practices.</li>
+              </ul>
+              <div class="mt-2">
+                <span class="skill-tag" style="font-size:0.7rem;">Cloud Collaboration</span>
+                <span class="skill-tag" style="font-size:0.7rem;">Task Management</span>
+                <span class="skill-tag" style="font-size:0.7rem;">KPI Management</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
   </div>
-
-  <div class="card">
-    <h3>Intimetec</h3>
-    <p>Software Engineer – QA (2021–2022)</p>
-  </div>
-
-  <div class="card">
-    <h3>Infanion</h3>
-    <p>Associate Test Engineer (2019–2021)</p>
-  </div>
-
 </section>
 
+<!-- PROJECTS -->
 <section id="projects">
-  <h2>Key Projects</h2>
+  <div class="container">
+    <div class="section-label">// FEATURED WORK</div>
+    <h2 class="section-title">Key Projects</h2>
+    <div class="divider"></div>
+    <div class="row g-4">
 
-  <div class="card">
-    <h3>ESIOP Web Automation</h3>
-    <p>Designed full automation framework with CI/CD integration.</p>
+      <div class="col-md-6 col-lg-4">
+        <div class="project-card">
+          <div class="project-icon">✈️</div>
+          <div class="project-title">ESIOP Web Automation</div>
+          <div class="project-desc">Full automation lifecycle ownership for the OneCollins RAM enterprise portal — framework design, CI/CD integration, deployment, and team mentoring for rapid regression feedback.</div>
+          <div class="tech-stack">
+            <span class="tech-badge">Selenium C#</span>
+            <span class="tech-badge">NUnit</span>
+            <span class="tech-badge">GitLab CI</span>
+            <span class="tech-badge">Azure DevOps</span>
+            <span class="tech-badge">Allure</span>
+          </div>
+          <div class="project-links">
+            <span class="project-link"><i class="bi bi-building"></i>Collins Aerospace</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-6 col-lg-4">
+        <div class="project-card">
+          <div class="project-icon">🔐</div>
+          <div class="project-title">DMSMS Access Control Portal</div>
+          <div class="project-desc">Automated access control, permission management, user roles, and risk mitigation module workflows with full defect tracking and stakeholder collaboration.</div>
+          <div class="tech-stack">
+            <span class="tech-badge">Selenium C#</span>
+            <span class="tech-badge">POM</span>
+            <span class="tech-badge">Azure DevOps</span>
+            <span class="tech-badge">Postman</span>
+          </div>
+          <div class="project-links">
+            <span class="project-link"><i class="bi bi-building"></i>Collins Aerospace</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-6 col-lg-4">
+        <div class="project-card">
+          <div class="project-icon">📊</div>
+          <div class="project-title">NRE Forecast Tool</div>
+          <div class="project-desc">End-to-end testing across QA, UAT and Production with Excel-like UI automation — cell drag, copy, paste — plus performance and concurrency testing under multi-user load.</div>
+          <div class="tech-stack">
+            <span class="tech-badge">Selenium C#</span>
+            <span class="tech-badge">NUnit</span>
+            <span class="tech-badge">CI/CD</span>
+            <span class="tech-badge">Performance Testing</span>
+          </div>
+          <div class="project-links">
+            <span class="project-link"><i class="bi bi-building"></i>Collins Aerospace</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-6 col-lg-4">
+        <div class="project-card">
+          <div class="project-icon">🏦</div>
+          <div class="project-title">Mortgage Loan Processing QA</div>
+          <div class="project-desc">Comprehensive functional and API testing for loan processing and credit/employment/SSN verification modules in a fintech enterprise platform.</div>
+          <div class="tech-stack">
+            <span class="tech-badge">Postman</span>
+            <span class="tech-badge">REST APIs</span>
+            <span class="tech-badge">Jira</span>
+            <span class="tech-badge">SQL Validation</span>
+          </div>
+          <div class="project-links">
+            <span class="project-link"><i class="bi bi-building"></i>Intimetec</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-6 col-lg-4">
+        <div class="project-card">
+          <div class="project-icon">🤖</div>
+          <div class="project-title">Selenium-C# Framework (POM)</div>
+          <div class="project-desc">Reusable, scalable test automation framework built from scratch featuring custom SeleniumHelper wrapper, ExcelReader, ExtentReports integration, and multi-browser support.</div>
+          <div class="tech-stack">
+            <span class="tech-badge">C#</span>
+            <span class="tech-badge">Selenium</span>
+            <span class="tech-badge">NUnit</span>
+            <span class="tech-badge">ExtentReports</span>
+            <span class="tech-badge">Chrome + Edge</span>
+          </div>
+          <div class="project-links">
+            <a href="https://github.com/arunkumarpalani" target="_blank" class="project-link"><i class="bi bi-github"></i>GitHub</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-6 col-lg-4">
+        <div class="project-card">
+          <div class="project-icon">🧪</div>
+          <div class="project-title">API Testing Suite</div>
+          <div class="project-desc">Comprehensive API testing strategy using Postman combined with MS SQL Server validation, verifying backend service reliability, data integrity and business logic correctness.</div>
+          <div class="tech-stack">
+            <span class="tech-badge">Postman</span>
+            <span class="tech-badge">REST API</span>
+            <span class="tech-badge">MS SQL Server</span>
+            <span class="tech-badge">SSMS</span>
+          </div>
+          <div class="project-links">
+            <a href="https://github.com/arunkumarpalani" target="_blank" class="project-link"><i class="bi bi-github"></i>GitHub</a>
+          </div>
+        </div>
+      </div>
+
+    </div>
   </div>
-
-  <div class="card">
-    <h3>DMSMS Portal</h3>
-    <p>Automated access control workflows using Selenium + NUnit.</p>
-  </div>
-
-  <div class="card">
-    <h3>NRE Forecast Tool</h3>
-    <p>Handled regression automation and multi-user testing.</p>
-  </div>
-
 </section>
 
+<!-- AWARDS -->
+<section id="awards" style="background:var(--surface);">
+  <div class="container">
+    <div class="section-label">// RECOGNITION</div>
+    <h2 class="section-title">Awards</h2>
+    <div class="divider"></div>
+    <div class="row g-3">
+      <div class="col-md-6">
+        <div class="award-card">
+          <div class="award-icon">⭐</div>
+          <div>
+            <div class="award-title">R Star Award — Multiple Times</div>
+            <div class="award-desc">Received multiple R Star Awards at Collins Aerospace for outstanding contributions to project quality, automation innovation, and delivery excellence.</div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="award-card">
+          <div class="award-icon">🏆</div>
+          <div>
+            <div class="award-title">Spot Award</div>
+            <div class="award-desc">Awarded for excellence in project delivery and quality engineering outcomes, recognizing impactful contributions to the team's release confidence.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EDUCATION -->
+<section id="education">
+  <div class="container">
+    <div class="section-label">// EDUCATION</div>
+    <h2 class="section-title">Academic Background</h2>
+    <div class="divider"></div>
+    <div class="col-lg-8 offset-lg-2">
+      <div class="tl-card d-flex gap-4 align-items-center flex-wrap">
+        <div style="font-size:3rem;">🎓</div>
+        <div>
+          <div style="font-family:'Syne',sans-serif;font-weight:800;font-size:1.1rem;">B.Tech — Computer Science & Engineering</div>
+          <div style="color:var(--accent);font-size:0.82rem;margin:0.3rem 0;">Annamacharya Institute of Technology and Sciences, Tirupati</div>
+          <div style="display:flex;gap:1rem;flex-wrap:wrap;margin-top:0.5rem;">
+            <span class="tl-period"><i class="bi bi-calendar3"></i>&nbsp;2015 – 2019</span>
+            <span class="tl-period"><i class="bi bi-award"></i>&nbsp;70%</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
 <section id="contact">
-  <h2>Contact</h2>
-  <p>Email: arun.qa961@gmail.com</p>
-  <p>Phone: +91 7013002336</p>
-  <p>
-    LinkedIn: 
-    <a href="https://linkedin.com/in/arunkumarpalani" target="_blank">
-      linkedin.com/in/arunkumarpalani
-    </a>
-  </p>
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-lg-7">
+        <div class="contact-card">
+          <div class="section-label" style="text-align:center;">// LET'S CONNECT</div>
+          <h2 class="section-title" style="text-align:center;">Get In Touch</h2>
+          <div class="divider mx-auto"></div>
+          <p style="color:var(--muted);margin-bottom:2rem;line-height:1.8;">
+            Open to senior QA automation roles, SDET positions, or quality engineering leadership opportunities. Let's build something reliable together.
+          </p>
+          <a href="mailto:arun.qa961@gmail.com" class="contact-item">
+            <i class="bi bi-envelope-fill"></i>
+            <span>arun.qa961@gmail.com</span>
+          </a>
+          <a href="tel:+917013002336" class="contact-item">
+            <i class="bi bi-telephone-fill"></i>
+            <span>+91 7013002336</span>
+          </a>
+          <a href="https://linkedin.com/in/arunkumarpalani" target="_blank" class="contact-item">
+            <i class="bi bi-linkedin"></i>
+            <span>linkedin.com/in/arunkumarpalani</span>
+          </a>
+          <a href="https://github.com/arunkumarpalani" target="_blank" class="contact-item">
+            <i class="bi bi-github"></i>
+            <span>github.com/arunkumarpalani</span>
+          </a>
+          <a class="contact-item" style="cursor:default;">
+            <i class="bi bi-geo-alt-fill"></i>
+            <span>Bengaluru, Karnataka, India</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
 </section>
 
+<!-- FOOTER -->
 <footer>
-  <p>© 2026 Arun Kumar Palani</p>
+  <div class="container">
+    <p>Designed & built by <a href="#">Arun Kumar Palani</a> &nbsp;·&nbsp; QA Automation Engineer &nbsp;·&nbsp; Bengaluru, India</p>
+    <p style="margin-top:0.4rem;font-size:0.68rem;">Built with HTML · CSS · Bootstrap 5 · Vanilla JS</p>
+  </div>
 </footer>
 
-<script src="script.js"></script>
+<!-- SCROLL TO TOP -->
+<button id="scrollTop" title="Back to top">
+  <i class="bi bi-arrow-up"></i>
+</button>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+  // Scroll to top button
+  const scrollBtn = document.getElementById('scrollTop');
+  window.addEventListener('scroll', () => {
+    scrollBtn.classList.toggle('visible', window.scrollY > 400);
+  });
+  scrollBtn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+
+  // Active nav highlighting
+  const sections = document.querySelectorAll('section[id]');
+  const navLinks = document.querySelectorAll('.navbar-nav .nav-link');
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        navLinks.forEach(l => l.classList.remove('active-nav'));
+        const active = document.querySelector(`.navbar-nav .nav-link[href="#${e.target.id}"]`);
+        if (active) active.classList.add('active-nav');
+      }
+    });
+  }, { threshold: 0.35 });
+  sections.forEach(s => observer.observe(s));
+
+  // Fade-up on scroll
+  const fadeEls = document.querySelectorAll('.tl-item, .skill-category, .project-card, .award-card');
+  const fadeObserver = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.style.animation = 'fadeUp 0.6s ease both';
+        e.target.style.opacity = '1';
+      }
+    });
+  }, { threshold: 0.1 });
+  fadeEls.forEach(el => {
+    el.style.opacity = '0';
+    fadeObserver.observe(el);
+  });
+</script>
 </body>
 </html>
